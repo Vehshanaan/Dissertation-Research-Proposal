@@ -1,0 +1,92 @@
+\documentclass[12pt, oneside]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+%\usepackage{hyperref}
+
+\usepackage{IEEEtrantools}
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        {\huges
+         \center{\huge{\textbf{Dissertation Research Proposal}}}
+         \\
+         \vspace{0.3cm}
+         \large{Self-organised Resource Sharing for Multi Agent System Based on STDMA}
+        \vspace{0.5cm}
+        \\
+        {\large By}
+        \\
+        \vspace{0.5cm}
+        \textbf{Runze Yuan}
+   		\vspace{1.5cm}
+        \\
+        \vspace{0.25cm}
+       \includegraphics[scale=0.6]{logos/bristolcrest_colour.pdf}
+        \hspace{5mm}
+        \includegraphics[scale=0.35]{logos/UWE_insignia.png}
+
+        \vspace{10mm}
+        {\large Department of Engineering Mathematics\\
+        \textsc{University of Bristol}}
+        \\
+        \&
+        \\
+        {\large Department of Engineering Design and Mathematics\\
+        \textsc{University of the West of England}}\\
+
+        \vspace{0.8cm}
+ 
+        \vspace{0.8cm}
+        \today
+        
+    \end{center}}
+    
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+
+
+\section{Aims and Objectives}
+\subsection{Aims}
+Based on the self-organised channel resource allocation principle of the STDMA(Self-organised Time Division Multiple Access) \cite{STDMA} communication protocol, develop a multi agent resource sharing (MARA) \cite{MARA_Overview1} method, make it self-organised, decentralised and scalable. 
+\subsection{Objectives}
+\begin{itemize}
+    \item Develop a multi agent communication scenario with STDMA in ROS2. In this scenario, multiple identical agents will share the same channel and all agents have both receiving and transmitting capabilities. The goal is to enable agents to autonomously organise/join the communication process after start up.
+    % 使用ROS2与其node实现多agent的通信场景模拟。在此场景中，多个相同的agent将共享同一个信道，且agent都具有收发功能，agents应当能自动地组织/在开机后加入通信过程。目标是使agent能够在开机后自主地组织/加入通信过程。
+    \item On the basis above, a simple two-dimensional grid world is implemented: a two-dimensional map composed of grids, each grid representing a part of space. Agents would move from one grid to another on the map.
+    % 在上述基础上实现简单的二维地图导航情景：一张由若干网格组成的二维地图，每一个网格代表空间的一部分。agent的运动就是在地图中从一个格子移动到另一个格子。格子的形状不仅限于四边形[]，这里需要后续进一步研究确定。
+    \item Using the principle of STDMA \cite{STDMA} to implement simple decentralized conflict-free space(which is a kind of resource) sharing and simulate implementation in the above scenario.
+    % 用STDMA的原理实现简单的去中心化无冲突空间（其也是某种资源）分享，并在上述场景中模拟实现。
+    \item STDMA is designed for 1D resource sharing (slots in time frames), and directly applying STDMA for 2D space sharing will definitely lead to some deadlock and inefficient scenarios\cite{MAPF_Deadlock_Explain1}\cite{MAPF_Deadlock_Explain2}. Determine the cause of this problem by observing the experiment, and make corresponding improvements to this problem. 
+    % 直接套用STDMA一定会导致某种死锁和低效的场景发生[]。通过实验模拟定位此类场景发生的原因并进行改进，设计一些资源分享中的规则，并提升算法的表现。
+    \item Use appropriate performance metrics (makespan, sum and average of path length, number of conflicts) to evaluate the advantages and disadvantages of algorithm performance. 
+    % 选取合适的性能指标，评判算法性能的优劣。
+\end{itemize}
+
+\section{Motivation}
+\subsection{Why decentralised multi agent system?}
+
+
+\section{Literature Review}
+\section{Impact Assessment}
+\section{Risk Register}
+\section{Timeline}
+
+
+\section{References}
+
+\bibliographystyle{plain}
+
+\bibliography{ref}
+
+\end{document}
