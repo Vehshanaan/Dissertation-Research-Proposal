@@ -17,11 +17,11 @@
     \begin{center}
         \vspace*{1cm}
         {\huges
-         \center{\huge{\textbf{Dissertation Research Proposal}}}
+        \center{\huge{\textbf{Dissertation Research Proposal}}}}
          \\
          \vspace{0.3cm}
-         \large{Self-organised Resource Sharing for Multi Agent System Based on STDMA}
-        \vspace{0.5cm}
+         \large{Self-organised Resource Sharing for Decentralised Multi Agent on 2D plane Based on STDMA}
+         \vspace{0.5cm}
         \\
         {\large By}
         \\
@@ -48,7 +48,7 @@
         \vspace{0.8cm}
         \today
         
-    \end{center}}
+    \end{center}
     
 \end{titlepage}
 
@@ -58,12 +58,13 @@
 
 \section{Aims and Objectives}
 \subsection{Aims}
-Based on the self-organised channel resource allocation principle of the STDMA(Self-organised Time Division Multiple Access) \cite{STDMA} communication protocol, develop a multi agent resource sharing (MARA) \cite{MARA_Overview1} method, make it self-organised, decentralised and scalable. 
+Based on the self-organised channel resource allocation principle of the STDMA(Self-organised Time Division Multiple Access) \cite{STDMA} communication protocol, develop a Multi Agent Resource Sharing (MARA) \cite{MARA_Overview1} method for agents moving on a 2D plane, make it self-organised, decentralised and scalable. 
 \subsection{Objectives}
+\label{Objectives}
 \begin{itemize}
     \item Develop a multi agent communication scenario with STDMA in ROS2. In this scenario, multiple identical agents will share the same channel and all agents have both receiving and transmitting capabilities. The goal is to enable agents to autonomously organise/join the communication process after start up.
     % 使用ROS2与其node实现多agent的通信场景模拟。在此场景中，多个相同的agent将共享同一个信道，且agent都具有收发功能，agents应当能自动地组织/在开机后加入通信过程。目标是使agent能够在开机后自主地组织/加入通信过程。
-    \item On the basis above, a simple two-dimensional grid world is implemented: a two-dimensional map composed of grids, each grid representing a part of space. Agents would move from one grid to another on the map.
+    \item On the basis above, a simple grid world is implemented: a 2D map composed of grids, each grid representing a part of space. Agents would move from one grid to another on the map.
     % 在上述基础上实现简单的二维地图导航情景：一张由若干网格组成的二维地图，每一个网格代表空间的一部分。agent的运动就是在地图中从一个格子移动到另一个格子。格子的形状不仅限于四边形[]，这里需要后续进一步研究确定。
     \item Using the principle of STDMA \cite{STDMA} to implement simple decentralized conflict-free space(which is a kind of resource) sharing and simulate implementation in the above scenario.
     % 用STDMA的原理实现简单的去中心化无冲突空间（其也是某种资源）分享，并在上述场景中模拟实现。
@@ -73,11 +74,75 @@ Based on the self-organised channel resource allocation principle of the STDMA(S
     % 选取合适的性能指标，评判算法性能的优劣。
 \end{itemize}
 
-\section{Motivation}
-\subsection{Why decentralised multi agent system?}
+\pagebreak
 
+\section{Motivation}
+%几个灵魂问题：
+% 1. 你的研究重要在哪儿？
+% 2. 为什么应用需要此种改变？
+% 3. 为什么你的方法能带来这种改变？
+% 4. 难在哪儿？
+% 5. 创新在哪儿？
+% 6. 为什么是你？
+\subsection{Why multi agent system in a 2D world?}
+% 解释去中心化多智能体系统的应用
+% 物流运输，制造业，电力系统，等等。
+% 中心化控制方法在大规模应用时往往受到以下限制：计算量的限制，较不灵活，且容易产生single point failure（失去系统中的关键决策者）。为了克服上述缺点，需要研究去中心化控制方法。
+% 
+%多智能体系统技术由于其灵活性和智能性等出色特点而得到了快速的增长和发展，这些特点在解决复杂的分布式问题时非常有用。 多智能体系统通过其协调、通信和协商等新兴特征，能够处理现实世界问题的复杂性。 多智能体系统也被视为一种技术和工具，有助于分析和开发大规模分布式系统或以人为中心的系统的新模型和理论。
+
+% edge computing 的上升趋势可以作为一项证据
+% 
+% 得益于设备计算能力的增长和智能设备的普及，智能设备之间协调的话题越来越受到关注。
+%The topic of collaboration between intelligent devices is becoming more and more popular thanks to the growth of device computing power and the popularity of intelligent devices. And that leads to the research of multi agent systems.
+
+% 智能可穿戴设备的趋势图here, 多智能体系统的柱状图here
+
+% 多智能体系统所具备的去中心化的灵活性和鲁棒性在面对复杂的分散式问题时非常有效[]。传统的中心化系统的缺陷如：single point failure, 计算量对规模的限制，对于去中心化的multi agent system 来说都不是问题。
+%The decentralised flexibility and robustness of multi agent systems are very effective when faced with complex distributed real-world problems\cite{Why_MAS_1}. The drawbacks of traditional centralised systems, such as single point failure and the computational limitation on system size, are significantly reduced in decentralised multi agent systems.
+
+% 关于多机器人集群
+
+% 这个研究题目的设想主要来源于仓库自动化中所使用的AGV机器人[]。AGV机器人的主要用途在于室内地点或仓库环境下的物料搬运，此种机器人在工业4.0和柔性生产需求提升的背景下有较好的发展前景。
+
+The idea for this research topic comes from the usage of Auto Guided Vehicles (AGV) \cite{AGV_explained} in warehouse automation. A typical AGV system is composed of many identical carrier robots and mainly used for unmanned cargo transporting in indoor environments (which could be \textbf{represented by a 2D plane}). Market demand for AGV is rising in the context of Industry 4.0 and the increasing demand for flexible manufacturing\cite{Industry_4.0}.
+
+% 在新的生产需求下，传统的中心化AGV控制方法逐渐不适用于新的使用场景。中心化的控制方法由于其对内存，通信，计算的限制，将其应用于更大规模的系统是很困难的。生产制造逐渐向去中心化提出要求[]。本研究的主题就是要实现一定程度的去中心化控制，
+
+In new production requirements, traditional centralised AGV control methods are gradually unsuitable for new application scenario. Centralised control methods are difficult to apply to larger systems due to their limitations on memory, communication, and computation. Production manufacturing is gradually demanding decentralised control\cite{Industry4.0_decentralised}.
+
+% 本研究主题中要解决的主要是AGV的路径空间分享问题。对于这一问题，一般将其视为某种multi agent system分类下的资源分享/路径规划问题。
+
+    The main focus in this research topic is the space sharing problem of AGV. For this problem, it is generally regarded as a resource sharing/path finding problem in multi agent system domain\cite{AGV_Review_2020}. Take AGV robots as agents, and all the agents should \textbf{resolve the resource (limited space in operating environment) sharing problem without a centralised controller.}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/Amazon_Warehouse.jpeg}
+    \caption{Example of AGV: Kiva system operating in Amazon warehouse.\footnotemark }
+    \label{fig:Amazon Warehouse Robots}
+\end{figure}
+
+\footnotetext{https://spectrum.ieee.org/interview-brad-porter-vp-of-robotics-at-amazon}
+
+\subsection{Why STDMA?}
+
+Self-organised Time Divided Multi Access (STDMA) is a field-tested \cite{STDMA_field_usage} channel access method which based on a set of policies about how  should the agents apply for slots in repeating frames (details explained in Section \ref{Literature_Review}). 
+
+% 选用STDMA的原因：现有的此领域研究有很严重的research gap：大多数研究假设通信不受限制，并对通信条件有苛刻的要求[]，并只专注于资源的共享方案。
+Reasons for using STDMA: Existing research has huge research gap in this field. Most studies assume that communication between robots is ideal \cite{Current_Research_Gap} and only focus on resource sharing schemes, which leads to strict communication requirements that are not practical.
+
+% 利用STDMA的原则构建机器人之间的通讯【cite 第一段】可以将去中心化自组织特性带入通讯条件的构筑中，缩小这一gap。但是时分复用通讯也有其局限性，因为通讯将会是串行的，所以资源分配方案的设计会受到一些影响。由于此串行的
+Using STDMA to build communication between robots (like previous mentioned in Section \ref{Objectives}) can bring decentralized self-organising characteristics into the formation of communication process, narrowing the research gap. 
+
+However, using STDMA for communication also has its limitations, because communication between robots would be serial, and robots must take turns to speak. In such condition the design of resource sharing schemes will be affected for robots have to wait for their turn to send messages. Using principles from STDMA again  to build the resource sharing scheme after we have self-organised communication based on STDMA seems feasible and make sense, because the limitation in communication is inherited from the STDMA protocol, and STDMA is complete on its own. But there could be other potentially better solutions, and without simulations I cannot answer this question yet. 
+
+The most challenging part could be developing appropriate resource sharing scheme in STDMA based communication environment.
+
+% 许多
+\pagebreak
 
 \section{Literature Review}
+\label{Literature_Review}
 \section{Impact Assessment}
 \section{Risk Register}
 \section{Timeline}
