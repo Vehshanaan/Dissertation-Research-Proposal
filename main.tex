@@ -58,7 +58,7 @@
 
 \section{Aims and Objectives}
 \subsection{Aims}
-Based on the self-organised channel resource allocation principle of the STDMA(Self-organised Time Division Multiple Access) \cite{STDMA} communication protocol, develop a Multi Agent Resource Sharing (MARA) \cite{MARA_Overview1} method for agents moving on a 2D plane, make it self-organised, decentralised and scalable. 
+Based on the self-organised channel resource allocation principle of the STDMA(Self-organised Time Division Multiple Access) \cite{STDMA} communication protocol, develop a method for agents to achieve collision-free moving on a 2D plane, make it self-organised, decentralised and scalable. 
 \subsection{Objectives}
 \label{Objectives}
 \begin{itemize}
@@ -113,7 +113,7 @@ In new production requirements, traditional centralised AGV control methods are 
 
 % 本研究主题中要解决的主要是AGV的路径空间分享问题。对于这一问题，一般将其视为某种multi agent system分类下的资源分享/路径规划问题。
 
-    The main focus in this research topic is the space sharing problem of AGV. For this problem, it is generally regarded as a resource sharing/path finding problem in multi agent system domain\cite{AGV_Review_2020}. Take AGV robots as agents, and all the agents should \textbf{resolve the resource (limited space in operating environment) sharing problem without a centralised controller.}
+    The main focus in this research topic is the space sharing problem of AGV. For this problem, it is generally regarded as a resource sharing/path planning problem in multi agent system domain\cite{AGV_Review_2020}. Take AGV robots as agents, and all the agents should \textbf{resolve the resource (limited space in operating environment) sharing problem without a centralised controller.}
 
 \begin{figure}
     \centering
@@ -138,11 +138,84 @@ However, using STDMA for communication also has its limitations, because communi
 
 The most challenging part could be developing appropriate resource sharing scheme in STDMA based communication environment.
 
+% 这里还需要大改，把challenge提出来，然后还要更贴合他提出的几个问题 记得参考他给的pdf改。那样灵感会多很多
+% 提出STDMA的优势：简单并只关注于可用的格子。
+
 % 许多
 \pagebreak
 
 \section{Literature Review}
 \label{Literature_Review}
+
+% literature review 应当总结出一个结构，并在开始写之前心里有个数
+
+% 我的literature review：
+
+% 此研究主题面临的主要问题是：使多智能体自组织通讯并实现无碰撞的移动。
+The challenges in this research topic is to enable self-organised communication with STDMA and collision-free movement of multi agents.
+\subsection{Self-organised communication with STDMA}
+% STDMA是一种MAC技术，主要用于无线网络的自组织通讯。其已被用于AIS（13年的那个的7）和VDL（13年那个的4），也有研究评估过STDMA在工厂环境中的应用以及用于车对车通讯的表现。其应用前景是可观的。接下来是STDMA原则的简单介绍。
+% 作为一种TDMA协议，STDMA将时间划分为等长度的帧，并将帧划分为若干个大小相等的槽。STDMA的基础假设是，所有的站点都有同步的时钟。工作站点的生命周期有四个阶段：初始化，网络进入，第一帧与连续运行。
+% 1. 初始化：站点监听一个完整的帧，确定帧中槽位的使用状态。后续将根据使用状态信息进行槽位的保留和申请。
+% 2. 网络进入：从可用的槽位中根据RTDMA的P持久【】选择一个，用此槽位宣布自身的存在，同时再为自己保留一个槽位。
+% 3. 第一帧： 在网络进入阶段中所保留的槽位里，进一步为自己保留更多槽位以满足工作需求（一定大小数据包的的传输）。每个槽位都有随机的超时时间，达到超时时间后槽位将被释放
+% 4. 连续运行：正常使用第一帧阶段保留的槽，若有槽过期则再次进行槽位的保留。
+
+% STDMA协议的性能主要受限于以下两个方面：
+% 冲突：多个站点选择了同一个槽。
+% 可用槽位不足：当可用插槽数量不足时，站点将被迫与与其最远的站点共用插槽。
+
+% 对于上述问题，有一些文章从插槽选择策略和算法参数方面提出了改进[老师的那个]，[刚找的那个]。
+
+STDMA\cite{STDMA} is a technology primarily used for self-organising communication in wireless networks. It has been used in AIS and VDL mode 4\cite{STDMA}, and there are also several studies evaluating its potential as a protocol for industrial applications\cite{STDMA_for_industry}.
+
+As a TDMA protocol, STDMA divides time into frames of equal length and divides the frames into a number of equally sized slots. the assumption of STDMA is that all sites have synchronised clocks. The life cycle of a working site has four phases: initialisation, network entry, first frame and continuous operation.
+
+Initialisation: Site listen to the channel for an entire frame, and determine the current allocation of slots. Subsequent phases would use unallocated slots to operate.
+
+Network Entry: Use an unallocated slot to announce its existence, and reserve one more slot for the next phase.
+
+First Frame: Use the slot reserved in the previous phase to reserve more slots to meet the work requirements. Each slot is assigned with a random time duration and will be released once exceeded. 
+
+Continuous Operation: Use slots reserved in the first frame phase to operate, and reserve slots again once they are released.
+
+The main constraints for STDMA are:
+(1) Collision: Multiple sites accidentally used the same slot, most likely to happen in network entry phase for sites has not yet announced its existence. (2) No available slots: More slots needed than exist, and sites are forced to use slots assigned to other sites. 
+
+For its constraints, there are several improvements for the slot arranging strategies \cite{STDMA_rule_improv1} and duration of slots and frames \cite{STDMA_para_improv1} \cite{STDMA_para_improv2}. But this is not the focus of this research.
+
+
+
+\subsection{Collision-free movement}
+
+% 一般来说，多智能体在空间中无碰撞移动的问题是某种任务分配/路径规划问题。此种问题将智能体在空间中的移动抽象为某在无向图中的移动，图中的节点代表空间，边代表空间之间的连接。这里的关键约束在于，智能体使用的路径之间应当没有碰撞，也就是
+
+In general, the problem of collision-free movement of multiple agents in space is taken as a part of \textit{Multi Agent Path Finding} (MAPF) \cite{MAPF_Deadlock_Explain1} problem, and MAPF has several subtypes like \textit{Multi Agent Pickup and Delivery}(MAPD), \textit{Multi Agent Multi Item Pickup and Delivery}(MAMPD)\cite{MAMPD}. Research in these subtypes are for the scenario of \textit{lifelong} MAPF: Agents in the system are in a constant task stream of picking up and delivering, which bring the problem beyond the one-shot solution. Due to the high degree of overlap between domains and potential naming confusion, these subtypes will not be presented separately below.
+
+The scenario defined in Section \ref{Objectives} is like classical MAPF definition. For a system consisting of $n$ agents, the MAPF problem consists of the following three inputs. 
+\begin{enumerate}
+    \item \textbf{Environment}. Environment is assumed to be priori known and described as an undirected graph $G = (V,E)$, whose vertices $V$ represent space in the environment and edges $E$ describe the connection of vertices.
+    \item \textbf{Source}. Starting vertices of the agents. Represented with $s:[1,...,n]\rightarrow V_{s}$, which maps $n$ agents to the source vertices $V_{s}$.
+    \item \textbf{Target}. Goal vertices of the agents. Represented with $t:[1,...,n]\rightarrow V_{t}$, which maps $n$ agents to the target vertices $V_{t}$.
+\end{enumerate}
+
+Time is assumed to be discrete steps. In each step, agents can only take one action $a(v)=v'$ which is a function that maps the current vertex $v$ to the next vertex $v'$. Agents have two potential actions: \textit{move} and \textit{wait}. \textit{Wait} means the agent will be waiting in the current vertex ($a(v)=v$), and \textit{move} means the agent will move to another neighbouring vertex in graph $G$ ($a(v)=v', (v,v')\in G$). 
+
+
+% 单智能体计划就是指一系列行动，执行此行动序列可以使智能体从出发点到达目标点。MAPF问题的解就是一个由系统中所有智能体的单智能体计划组成的集合。
+A \textbf{single-agent plan} refers to a series of actions $\pi_{n} = (a_{1},...,a_{k})$ that can be executed to move an agent from a source vertex to a target vertex. The \textbf{solution} to the MAPF problem is a set of single-agent plans $\pi=(\pi_{1},...,\pi_{n})$ for all $n$ agents in the system. 
+
+However, there could be conflicts in the solution, which results in collision between agents. Conflicts are defined as different agents are planned to occupy the same edge or vertex in the same time step. \textbf{The aim of MAPF algorithm designing is to minimize conflicts in the solution.}
+
+https://www.mdpi.com/2075-1702/10/9/773
+
+
+
+
+
+
+% 根据解决方案的特性可以有以下几种对立的坐标轴：
+
 \section{Impact Assessment}
 \section{Risk Register}
 \section{Timeline}
